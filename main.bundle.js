@@ -3461,6 +3461,10 @@ var AboutService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__authentication_service__ = __webpack_require__("../../../../../src/app/shared/services/authentication.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_delay__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/delay.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_random_string__ = __webpack_require__("../../../../random-string/lib/random-string.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_random_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_random_string__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3__ = __webpack_require__("../../../../aws-sdk/clients/s3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3470,6 +3474,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 
@@ -3510,6 +3516,23 @@ var ArtistService = (function () {
     };
     ArtistService.prototype.changeOrders = function (data) {
         return this.http.patch(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiURL + 'admin/artist/changeorder/', data, { headers: this.header });
+    };
+    ArtistService.prototype.uploadThumb = function (file) {
+        var contentType = file.type;
+        var bucket = new __WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3__({
+            accessKeyId: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].accessKeyId,
+            secretAccessKey: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].secretAccessKey,
+            region: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].region
+        });
+        var ext = '.' + file.name.split('.').pop();
+        var params = {
+            Bucket: 'music-sync',
+            Key: __WEBPACK_IMPORTED_MODULE_5_random_string__() + ext,
+            Body: file,
+            ACL: 'public-read',
+            ContentType: contentType
+        };
+        return bucket.upload(params);
     };
     ArtistService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -3942,25 +3965,6 @@ var SongsService = (function () {
             ACL: 'public-read',
             ContentType: contentType
         };
-        // bucket.upload(params, function (err, data) {
-        //     if (err) {
-        //         console.log('There was an error uploading your file: ', err);
-        //         return false;
-        //     }
-        //     console.log('Successfully uploaded file.', data);
-        //     return true;
-        // });
-        //for upload progress   
-        /*return bucket.upload(params).on('httpUploadProgress', function (evt) {
-            console.log(evt.loaded + ' of ' + evt.total + ' Bytes');
-        }).send(function (err, data) {
-            if (err) {
-                console.log('There was an error uploading your file: ', err);
-                return false;
-            }
-            console.log('Successfully uploaded file.', data);
-            return true;
-        });*/
         return bucket.upload(params);
     };
     SongsService.prototype.download = function () {
