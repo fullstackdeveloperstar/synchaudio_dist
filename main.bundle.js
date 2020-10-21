@@ -5231,10 +5231,10 @@ var PlaylistTablePopupComponent = (function () {
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    apiURL: 'http://localhost/',
-    siteURL: 'http://localhost/',
-    // apiURL: 'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
-    // siteURL:'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
+    // apiURL: 'http://localhost/',
+    // siteURL:'http://localhost/',
+    apiURL: 'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
+    siteURL: 'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
     accessKeyId: 'AKIAILWKIV5YGWY6OXAA',
     secretAccessKey: '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',
     region: 'us-east-2'
