@@ -3780,6 +3780,9 @@ var PlacementService = (function () {
         };
         return bucket.upload(params);
     };
+    PlacementService.prototype.changeFeature = function (placement_id) {
+        return this.http.post(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiURL + 'admin/placement/changefeatured/' + placement_id, { headers: this.header });
+    };
     PlacementService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */],
@@ -4564,13 +4567,13 @@ var NavigationService = (function () {
                 // icon: 'dashboard',
                 state: 'page/catalog'
             },
-            {
-                name: 'SONGS',
-                type: 'link',
-                tooltip: 'Songs',
-                // icon: 'dashboard',
-                state: 'page/songs'
-            },
+            // {
+            //   name: 'SONGS',
+            //   type: 'link',
+            //   tooltip: 'Songs',
+            //   // icon: 'dashboard',
+            //   state: 'page/songs'
+            // },
             {
                 name: 'PLAYLISTS',
                 type: 'link',
@@ -5228,10 +5231,10 @@ var PlaylistTablePopupComponent = (function () {
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    // apiURL: 'http://localhost/',
-    apiURL: 'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
-    siteURL: 'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
-    // siteURL:'http://3.81.79.96/',
+    apiURL: 'http://localhost/',
+    siteURL: 'http://localhost/',
+    // apiURL: 'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
+    // siteURL:'http://synchaudio-env.eba-m43ng3ph.us-west-1.elasticbeanstalk.com/index.php/',
     accessKeyId: 'AKIAILWKIV5YGWY6OXAA',
     secretAccessKey: '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',
     region: 'us-east-2'
