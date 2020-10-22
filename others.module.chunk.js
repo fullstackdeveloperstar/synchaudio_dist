@@ -397,6 +397,7 @@ var AppHomeComponent = (function () {
     };
     AppHomeComponent.prototype.gotoPlacement = function (placement_id) {
         // this.router.navigate(['/page/playlist/' + playlist_id]);
+        this.router.navigate(['/page/placement_detail/' + placement_id]);
     };
     AppHomeComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -877,14 +878,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__contact_app_contact_component__ = __webpack_require__("../../../../../src/app/views/contact/app-contact.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__licenserequest_licenserequest_component__ = __webpack_require__("../../../../../src/app/views/licenserequest/licenserequest.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__placement_placement_component__ = __webpack_require__("../../../../../src/app/views/placement/placement.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__musicreview_musicreview_component__ = __webpack_require__("../../../../../src/app/views/musicreview/musicreview.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__others_routing__ = __webpack_require__("../../../../../src/app/views/others/others.routing.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__placementdetail_placementdetail_component__ = __webpack_require__("../../../../../src/app/views/placementdetail/placementdetail.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__musicreview_musicreview_component__ = __webpack_require__("../../../../../src/app/views/musicreview/musicreview.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__others_routing__ = __webpack_require__("../../../../../src/app/views/others/others.routing.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -939,7 +942,7 @@ var OthersModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["s" /* MatNativeDateModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_flex_layout__["a" /* FlexLayoutModule */],
                 __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__["a" /* SharedModule */],
-                __WEBPACK_IMPORTED_MODULE_1__angular_router__["h" /* RouterModule */].forChild(__WEBPACK_IMPORTED_MODULE_24__others_routing__["a" /* OthersRoutes */]),
+                __WEBPACK_IMPORTED_MODULE_1__angular_router__["h" /* RouterModule */].forChild(__WEBPACK_IMPORTED_MODULE_25__others_routing__["a" /* OthersRoutes */]),
                 __WEBPACK_IMPORTED_MODULE_7_ng5_slider__["a" /* Ng5SliderModule */],
                 __WEBPACK_IMPORTED_MODULE_8_ng_simple_slideshow__["a" /* SlideshowModule */],
                 __WEBPACK_IMPORTED_MODULE_9__shared_services_app_loader_app_loader_module__["a" /* AppLoaderModule */]
@@ -958,7 +961,8 @@ var OthersModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_20__contact_app_contact_component__["a" /* AppContactComponent */],
                 __WEBPACK_IMPORTED_MODULE_21__licenserequest_licenserequest_component__["a" /* AppLicenseRequestComponent */],
                 __WEBPACK_IMPORTED_MODULE_22__placement_placement_component__["a" /* AppPlacementComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__musicreview_musicreview_component__["a" /* AppMusicReviewComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__placementdetail_placementdetail_component__["a" /* PlacementdetailComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__musicreview_musicreview_component__["a" /* AppMusicReviewComponent */],
             ],
             entryComponents: []
         })
@@ -987,7 +991,9 @@ var OthersModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__contact_app_contact_component__ = __webpack_require__("../../../../../src/app/views/contact/app-contact.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__licenserequest_licenserequest_component__ = __webpack_require__("../../../../../src/app/views/licenserequest/licenserequest.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__placement_placement_component__ = __webpack_require__("../../../../../src/app/views/placement/placement.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__musicreview_musicreview_component__ = __webpack_require__("../../../../../src/app/views/musicreview/musicreview.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__placementdetail_placementdetail_component__ = __webpack_require__("../../../../../src/app/views/placementdetail/placementdetail.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__musicreview_musicreview_component__ = __webpack_require__("../../../../../src/app/views/musicreview/musicreview.component.ts");
+
 
 
 
@@ -1063,8 +1069,13 @@ var OthersRoutes = [
         data: { title: 'Placements', breadcrumb: 'Placements' }
     },
     {
+        path: 'placement_detail/:placement_id',
+        component: __WEBPACK_IMPORTED_MODULE_12__placementdetail_placementdetail_component__["a" /* PlacementdetailComponent */],
+        data: { title: 'Placement Detail', breadcrumb: 'Placement Detail' }
+    },
+    {
         path: 'musicreviews',
-        component: __WEBPACK_IMPORTED_MODULE_12__musicreview_musicreview_component__["a" /* AppMusicReviewComponent */],
+        component: __WEBPACK_IMPORTED_MODULE_13__musicreview_musicreview_component__["a" /* AppMusicReviewComponent */],
         data: { title: 'MusicReviews', breadcrumb: 'MusicReviews' }
     }
 ];
@@ -1075,7 +1086,7 @@ var OthersRoutes = [
 /***/ "../../../../../src/app/views/placement/placement.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"m-333\">\r\n  <mat-card class=\"default\" *ngFor=\"let placement of placements\">\r\n    <mat-card-title>{{placement.placement_title}}</mat-card-title>\r\n    <mat-card-content class=\"placement-content\">\r\n      <img [src]=\"placement.placement_poster || '/assets/images/avatar.png'\" alt=\"\" class=\"placement-poster\">\r\n      <p>\r\n        {{placement.placement_description}}\r\n      </p>\r\n    </mat-card-content>\r\n    <mat-divider></mat-divider>\r\n    <mat-card-actions>\r\n      <button color=\"warn\" mat-button (click)=\"openLink(placement.placement_youtube)\">Youtube</button>\r\n      <button mat-button (click)=\"openLink(placement.placement_linkto)\">Link</button>\r\n      <span fxFlex></span>\r\n      <img *ngFor=\"let artist of placement.artists\" [src]=\"artist.artist_avatar  || '/assets/images/avatar.png'\" class=\"artist-avatar\" (click)=\"gotoartist(artist.artist_id)\">\r\n    </mat-card-actions>\r\n  </mat-card>\r\n</div>\r\n"
+module.exports = "<div class=\"m-333\">\r\n  <mat-card class=\"default\" *ngFor=\"let placement of placements\">\r\n    <mat-card-title>{{placement.placement_title}}</mat-card-title>\r\n    <mat-card-content class=\"placement-content\">\r\n      <img [src]=\"placement.placement_poster || '/assets/images/avatar.png'\" alt=\"\" class=\"placement-poster\">\r\n      <p>\r\n        {{placement.placement_description}}\r\n      </p>\r\n    </mat-card-content>\r\n    <mat-divider></mat-divider>\r\n    <mat-card-actions>\r\n      <button color=\"warn\" mat-button (click)=\"openLink(placement.placement_youtube)\">Youtube</button>\r\n      <button mat-button (click)=\"openLink(placement.placement_linkto)\">Link</button>\r\n      <button color=\"warn\" mat-button (click)=\"gotodetail(placement.placement_id)\">View Detail</button>\r\n      <span fxFlex></span>\r\n      <img *ngFor=\"let artist of placement.artists\" [src]=\"artist.artist_avatar  || '/assets/images/avatar.png'\" class=\"artist-avatar\" (click)=\"gotoartist(artist.artist_id)\">\r\n\r\n    </mat-card-actions>\r\n  </mat-card>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1140,6 +1151,9 @@ var AppPlacementComponent = (function () {
     AppPlacementComponent.prototype.gotoartist = function (artist_id) {
         this.router.navigate(['/page/artist/' + artist_id]);
     };
+    AppPlacementComponent.prototype.gotodetail = function (placement_id) {
+        this.router.navigate(['/page/placement_detail/' + placement_id]);
+    };
     AppPlacementComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-placement',
@@ -1150,6 +1164,90 @@ var AppPlacementComponent = (function () {
             __WEBPACK_IMPORTED_MODULE_1__angular_router__["g" /* Router */]])
     ], AppPlacementComponent);
     return AppPlacementComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/views/placementdetail/placementdetail.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\">\n    <div fxFlex=\"100\" fxFlex.gt-md=\"50\" fxFlex.gt-sm=\"50\" *ngIf=\"placement\">\n      <img mat-card-image [src]=\"placement.placement_poster || '/assets/images/avatar.png'\" class=\"placement-thumb\" alt=\"\">\n    </div>\n    <div fxFlex=\"100\" fxFlex.gt-sm=\"50\" fxFlex.gt-md=\"50\" *ngIf=\"placement\">\n      <div [innerHTML]=\"spotify_embed\"></div>\n    </div>\n  \n\n  <mat-card fxFlex=\"100\" class=\"profile-sidebar mb-1 pb-0\"  *ngIf=\"placement\">\n   \n    <div class=\"profile-title mb-1\">\n      <div class=\"main-title\">{{placement.placement_title}}</div>\n      \n      <div class=\"text-muted\">{{placement.placement_description}}</div>\n    </div>\n\n    <div class=\"profile-actions mb-1\">\n      <a [href]=\"'mailto:noreply@synchaudio.com?subject=Share placement ' + placement.placement_title + '&body=' + placementsharelink\">\n        <button mat-raised-button color=\"primary\">Share</button>\n      </a>\n    </div> \n  </mat-card>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/views/placementdetail/placementdetail.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".placement-thumb {\n  -webkit-box-shadow: rgba(0, 0, 0, 0.21) 0px 3px 3px 0px;\n          box-shadow: rgba(0, 0, 0, 0.21) 0px 3px 3px 0px;\n  border-radius: 5px;\n  -webkit-transition: all 0.15s ease 0s;\n  transition: all 0.15s ease 0s;\n  margin-top: 10px !important;\n  width: 100%; }\n  .placement-thumb:hover {\n    -webkit-transform: scale(1.01);\n            transform: scale(1.01);\n    -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 21px 48px 0px;\n            box-shadow: rgba(0, 0, 0, 0.35) 0px 21px 48px 0px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/views/placementdetail/placementdetail.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlacementdetailComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_admin_placement_service__ = __webpack_require__("../../../../../src/app/shared/services/admin/placement.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var PlacementdetailComponent = (function () {
+    function PlacementdetailComponent(activedRoute, placementService, sanitizer) {
+        this.activedRoute = activedRoute;
+        this.placementService = placementService;
+        this.sanitizer = sanitizer;
+    }
+    PlacementdetailComponent.prototype.ngOnInit = function () {
+        this.placement_id = this.activedRoute.snapshot.params['placement_id'];
+        this.loadPlacement();
+    };
+    PlacementdetailComponent.prototype.loadPlacement = function () {
+        var _this = this;
+        this.placementService.getItem(this.placement_id).subscribe(function (data) {
+            _this.placement = data;
+            _this.placementsharelink = __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].siteURL + 'page/placement_detail/' + _this.placement.placement_id;
+            _this.spotify_embed = _this.sanitizer.bypassSecurityTrustHtml(data['placement_spotify_embed']);
+        });
+    };
+    PlacementdetailComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-placementdetail',
+            template: __webpack_require__("../../../../../src/app/views/placementdetail/placementdetail.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/views/placementdetail/placementdetail.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_3__shared_services_admin_placement_service__["a" /* PlacementService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["DomSanitizer"]])
+    ], PlacementdetailComponent);
+    return PlacementdetailComponent;
 }());
 
 

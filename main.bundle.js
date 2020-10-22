@@ -3778,6 +3778,9 @@ var PlacementService = (function () {
     PlacementService.prototype.getAll = function () {
         return this.http.get(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiURL + 'admin/placement/placements');
     };
+    PlacementService.prototype.getItem = function (placement_id) {
+        return this.http.get(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiURL + 'admin/placement/placement/' + placement_id);
+    };
     PlacementService.prototype.addItem = function (data) {
         return this.http.post(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiURL + 'admin/placement/placement', data, { headers: this.header });
     };
