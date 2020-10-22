@@ -3828,6 +3828,10 @@ var PlacementService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__authentication_service__ = __webpack_require__("../../../../../src/app/shared/services/authentication.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_delay__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/delay.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_random_string__ = __webpack_require__("../../../../random-string/lib/random-string.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_random_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_random_string__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3__ = __webpack_require__("../../../../aws-sdk/clients/s3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3837,6 +3841,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 
@@ -3877,6 +3883,23 @@ var PlaylistService = (function () {
     };
     PlaylistService.prototype.changeFeature = function (playlist_id) {
         return this.http.post(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiURL + 'admin/playlist/changefeatured/' + playlist_id, { headers: this.header });
+    };
+    PlaylistService.prototype.uploadThumb = function (file) {
+        var contentType = file.type;
+        var bucket = new __WEBPACK_IMPORTED_MODULE_6_aws_sdk_clients_s3__({
+            accessKeyId: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].accessKeyId,
+            secretAccessKey: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].secretAccessKey,
+            region: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].region
+        });
+        var ext = '.' + file.name.split('.').pop();
+        var params = {
+            Bucket: 'music-sync',
+            Key: __WEBPACK_IMPORTED_MODULE_5_random_string__() + ext,
+            Body: file,
+            ACL: 'public-read',
+            ContentType: contentType
+        };
+        return bucket.upload(params);
     };
     PlaylistService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -5103,7 +5126,7 @@ var SharedModule = (function () {
 /***/ "../../../../../src/app/views/admin/playlist/playlistpopup/playlist-table-popup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 matDialogTitle>{{data.title}}</h1>\r\n  <form [formGroup]=\"itemForm\" (ngSubmit)=\"submit()\">\r\n  <div fxLayout=\"row\" fxLayout.lt-sm=\"column\" fxLayoutWrap=\"wrap\">\r\n    \r\n    <div fxFlex=\"100\"  class=\"pr-1\">\r\n      <img [src]=\"avatar_url || '/assets/images/avatar.png'\" class=\"artist-thumb\" id='avatar_img'>\r\n      <input type=\"file\" class=\"avatar-input\" id=\"avatar-input\" accept=\"image/*\" (change)=\"onFileChange($event)\">\r\n      <button mat-mini-fab color=\"warn\" type=\"button\" class=\"mr-1 change-avatar-btn\" (click)=\"clickChangeAvatar()\"><mat-icon>create</mat-icon></button>\r\n      <button mat-raised-button color=\"warn\" type='button' class=\"mr-1\" *ngIf=\"is_changed_avatar\" (click)=\"upload()\">UPLOAD</button>\r\n    </div>\r\n    \r\n    <div fxFlex=\"50\"  class=\"pr-1\">\r\n      <mat-form-field class=\"full-width\">\r\n        <input\r\n        matInput\r\n        name=\"playlist_title\"\r\n        [formControl]=\"itemForm.controls['playlist_title']\"\r\n        placeholder=\"Playlist Title\">\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <mat-form-field fxFlex=\"100\">\r\n      <textarea matInput placeholder=\"Note\" [formControl]=\"itemForm.controls['playlist_note']\" ></textarea>\r\n    </mat-form-field>\r\n\r\n    <div fxFlex=\"50\"  class=\"pt-1 pr-1\">\r\n      <mat-slide-toggle [formControl]=\"itemForm.controls['playlist_status']\">Playlist Status</mat-slide-toggle>\r\n    </div>\r\n\r\n    <div fxFlex=\"100\" class=\"mt-1\">\r\n      <button mat-raised-button color=\"primary\" [disabled]=\"itemForm.invalid\">Save</button>\r\n      <span fxFlex></span>\r\n      <button mat-button color=\"warn\" type=\"button\" (click)=\"dialogRef.close(false)\">Cancel</button>\r\n    </div>\r\n  </div>\r\n  </form>"
+module.exports = "<h1 matDialogTitle>{{data.title}}</h1>\r\n  <form [formGroup]=\"itemForm\" (ngSubmit)=\"submit()\">\r\n  <div fxLayout=\"row\" fxLayout.lt-sm=\"column\" fxLayoutWrap=\"wrap\">\r\n    \r\n    <div fxFlex=\"100\"  class=\"pr-1\">\r\n      <img [src]=\"avatar_url || '/assets/images/avatar.png'\" class=\"artist-thumb\" id='avatar_img'>\r\n      <input type=\"file\" class=\"avatar-input\" id=\"avatar-input\" accept=\"image/*\" (change)=\"onFileChange($event)\">\r\n      <button mat-mini-fab color=\"warn\" type=\"button\" class=\"mr-1 change-avatar-btn\" (click)=\"clickChangeAvatar()\"><mat-icon>create</mat-icon></button>\r\n      <button mat-raised-button color=\"warn\" type='button' class=\"mr-1\" *ngIf=\"is_changed_avatar\" (click)=\"upload()\">UPLOAD</button>\r\n      <mat-spinner *ngIf=\"is_uploading\"></mat-spinner>\r\n    </div>\r\n    \r\n    <div fxFlex=\"50\"  class=\"pr-1\">\r\n      <mat-form-field class=\"full-width\">\r\n        <input\r\n        matInput\r\n        name=\"playlist_title\"\r\n        [formControl]=\"itemForm.controls['playlist_title']\"\r\n        placeholder=\"Playlist Title\">\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <mat-form-field fxFlex=\"100\">\r\n      <textarea matInput placeholder=\"Note\" [formControl]=\"itemForm.controls['playlist_note']\" ></textarea>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field fxFlex=\"100\">\r\n      <textarea matInput placeholder=\"Spotify Playlist\" [formControl]=\"itemForm.controls['playlist_spotify_embed']\" ></textarea>\r\n    </mat-form-field>\r\n\r\n    <div fxFlex=\"50\"  class=\"pt-1 pr-1\">\r\n      <mat-slide-toggle [formControl]=\"itemForm.controls['playlist_status']\">Playlist Status</mat-slide-toggle>\r\n    </div>\r\n\r\n    <div fxFlex=\"100\" class=\"mt-1\">\r\n      <button mat-raised-button color=\"primary\" [disabled]=\"itemForm.invalid\">Save</button>\r\n      <span fxFlex></span>\r\n      <button mat-button color=\"warn\" type=\"button\" (click)=\"dialogRef.close(false)\">Cancel</button>\r\n    </div>\r\n  </div>\r\n  </form>"
 
 /***/ }),
 
@@ -5161,6 +5184,7 @@ var PlaylistTablePopupComponent = (function () {
         this.playlistService = playlistService;
         this.is_changed_avatar = false;
         this.avatar_url = '';
+        this.is_uploading = false;
     }
     PlaylistTablePopupComponent.prototype.ngOnInit = function () {
         this.buildItemForm(this.data.payload);
@@ -5171,7 +5195,8 @@ var PlaylistTablePopupComponent = (function () {
             playlist_title: [item.playlist_title || '', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required],
             playlist_note: [item.playlist_note || '', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required],
             playlist_status: [item.playlist_status == 0 ? false : true],
-            playlist_thumb: [item.playlist_thumb]
+            playlist_thumb: [item.playlist_thumb],
+            playlist_spotify_embed: [item.playlist_spotify_embed]
         });
     };
     PlaylistTablePopupComponent.prototype.submit = function () {
@@ -5194,15 +5219,33 @@ var PlaylistTablePopupComponent = (function () {
         }
     };
     PlaylistTablePopupComponent.prototype.upload = function () {
-        var _this = this;
-        var formData = new FormData();
-        formData.append('playlist_thumb', this.file);
-        this.playlistService.uploadPlaylistThumb(formData).subscribe(function (res) {
-            _this.is_changed_avatar = false;
-            // this.itemForm.value.playlist_thumb = res.url;
-            _this.itemForm.controls['playlist_thumb'].setValue(res.url);
-        }, function (err) {
-            console.log(err);
+        // const formData = new FormData();
+        // formData.append('playlist_thumb', this.file);
+        // this.playlistService.uploadPlaylistThumb(formData).subscribe(
+        //   (res: any) => {
+        //     this.is_changed_avatar = false;
+        //     // this.itemForm.value.playlist_thumb = res.url;
+        //     this.itemForm.controls['playlist_thumb'].setValue( res.url);
+        //   },
+        //   (err) => {
+        //     console.log(err)
+        //   }
+        // );
+        this.is_uploading = true;
+        var me = this;
+        this.playlistService.uploadThumb(this.file).on('httpUploadProgress', function (evt) {
+            console.log(evt.loaded + ' of ' + evt.total + ' Bytes');
+        }).send(function (err, data) {
+            if (err) {
+                console.log('There was an error uploading your file: ', err);
+                me.is_uploading = false;
+                return false;
+            }
+            console.log('Successfully uploaded file.', data);
+            this.is_changed_avatar = false;
+            me.itemForm.controls['playlist_thumb'].setValue(data['Location']);
+            me.is_uploading = false;
+            return true;
         });
     };
     PlaylistTablePopupComponent = __decorate([

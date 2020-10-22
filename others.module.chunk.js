@@ -1159,7 +1159,7 @@ var AppPlacementComponent = (function () {
 /***/ "../../../../../src/app/views/playlist/app-playlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"row\" fxLayoutWrap=\"wrap\">\r\n  <div fxFlex=\"100\" fxFlex.gt-md=\"300px\" fxFlex.gt-sm=\"50\" *ngIf=\"playlist\">\r\n    <mat-card class=\"profile-sidebar mb-1 pb-0\">\r\n      <div class=\" text-center\">\r\n        <img mat-card-image [src]=\"playlist.playlist_thumb || '/assets/images/avatar.png'\" class=\"playlist-thumb\" alt=\"\">\r\n      </div>\r\n      <div class=\"profile-title text-center mb-1\">\r\n        <div class=\"main-title\">{{playlist.playlist_title}}</div>\r\n        \r\n        <div class=\"text-muted\">{{playlist.playlist_note}}</div>\r\n      </div>\r\n\r\n      <div class=\"profile-actions text-center mb-1\">\r\n        <a [href]=\"'mailto:noreply@synchaudio.com?subject=Share Playlist ' + playlist.playlist_title + '&body=' + playlistsharelink\">\r\n          <button mat-raised-button color=\"primary\">Share</button>\r\n        </a>\r\n      </div> \r\n    </mat-card>\r\n  </div>\r\n\r\n<!-- Profile Views -->\r\n  <div fxFlex=\"100\" fxFlex.gt-sm=\"50\" fxFlex.gt-md=\"calc(100% - 300px)\" *ngIf=\"playlist\">\r\n    <app-songitem *ngFor=\"let song of playlist.songs\" [songItem]='song'></app-songitem>\r\n  </div>\r\n</div>"
+module.exports = "<div fxLayout=\"row\" fxLayoutWrap=\"wrap\">\r\n  <div fxFlex=\"100\" fxFlex.gt-md=\"50\" fxFlex.gt-sm=\"50\" *ngIf=\"playlist\">\r\n    <img mat-card-image [src]=\"playlist.playlist_thumb || '/assets/images/avatar.png'\" class=\"playlist-thumb\" alt=\"\">\r\n    <!-- <mat-card class=\"profile-sidebar mb-1 pb-0\">\r\n      <div class=\" text-center\">\r\n        <img mat-card-image [src]=\"playlist.playlist_thumb || '/assets/images/avatar.png'\" class=\"playlist-thumb\" alt=\"\">\r\n      </div>\r\n      <div class=\"profile-title text-center mb-1\">\r\n        <div class=\"main-title\">{{playlist.playlist_title}}</div>\r\n        \r\n        <div class=\"text-muted\">{{playlist.playlist_note}}</div>\r\n      </div>\r\n\r\n      <div class=\"profile-actions text-center mb-1\">\r\n        <a [href]=\"'mailto:noreply@synchaudio.com?subject=Share Playlist ' + playlist.playlist_title + '&body=' + playlistsharelink\">\r\n          <button mat-raised-button color=\"primary\">Share</button>\r\n        </a>\r\n      </div> \r\n    </mat-card> -->\r\n  </div>\r\n\r\n<!-- Profile Views -->\r\n  <div fxFlex=\"100\" fxFlex.gt-sm=\"50\" fxFlex.gt-md=\"50\" *ngIf=\"playlist\">\r\n    <!-- <app-songitem *ngFor=\"let song of playlist.songs\" [songItem]='song'></app-songitem> -->\r\n    <div [innerHTML]=\"spotify_embed\"></div>\r\n  </div>\r\n\r\n  <mat-card fxFlex=\"100\" class=\"profile-sidebar mb-1 pb-0\"  *ngIf=\"playlist\">\r\n    <!-- <div class=\" text-center\">\r\n      <img mat-card-image [src]=\"playlist.playlist_thumb || '/assets/images/avatar.png'\" class=\"playlist-thumb\" alt=\"\">\r\n    </div> -->\r\n    <div class=\"profile-title mb-1\">\r\n      <div class=\"main-title\">{{playlist.playlist_title}}</div>\r\n      \r\n      <div class=\"text-muted\">{{playlist.playlist_note}}</div>\r\n    </div>\r\n\r\n    <div class=\"profile-actions mb-1\">\r\n      <a [href]=\"'mailto:noreply@synchaudio.com?subject=Share Playlist ' + playlist.playlist_title + '&body=' + playlistsharelink\">\r\n        <button mat-raised-button color=\"primary\">Share</button>\r\n      </a>\r\n    </div> \r\n  </mat-card>\r\n</div>"
 
 /***/ }),
 
@@ -1171,7 +1171,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".playlist-thumb {\n  -webkit-box-shadow: rgba(0, 0, 0, 0.21) 0px 3px 3px 0px;\n          box-shadow: rgba(0, 0, 0, 0.21) 0px 3px 3px 0px;\n  border-radius: 5px;\n  -webkit-transition: all 0.15s ease 0s;\n  transition: all 0.15s ease 0s;\n  margin-top: 10px !important; }\n  .playlist-thumb:hover {\n    -webkit-transform: scale(1.01);\n            transform: scale(1.01);\n    -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 21px 48px 0px;\n            box-shadow: rgba(0, 0, 0, 0.35) 0px 21px 48px 0px; }\n", ""]);
+exports.push([module.i, ".playlist-thumb {\n  -webkit-box-shadow: rgba(0, 0, 0, 0.21) 0px 3px 3px 0px;\n          box-shadow: rgba(0, 0, 0, 0.21) 0px 3px 3px 0px;\n  border-radius: 5px;\n  -webkit-transition: all 0.15s ease 0s;\n  transition: all 0.15s ease 0s;\n  margin-top: 10px !important;\n  width: 100%; }\n  .playlist-thumb:hover {\n    -webkit-transform: scale(1.01);\n            transform: scale(1.01);\n    -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 21px 48px 0px;\n            box-shadow: rgba(0, 0, 0, 0.35) 0px 21px 48px 0px; }\n", ""]);
 
 // exports
 
@@ -1188,8 +1188,9 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppPlaylistComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_admin_playlist_service__ = __webpack_require__("../../../../../src/app/shared/services/admin/playlist.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_admin_playlist_service__ = __webpack_require__("../../../../../src/app/shared/services/admin/playlist.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1203,10 +1204,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppPlaylistComponent = (function () {
-    function AppPlaylistComponent(activedRoute, playlistService) {
+    function AppPlaylistComponent(activedRoute, playlistService, sanitizer) {
         this.activedRoute = activedRoute;
         this.playlistService = playlistService;
+        this.sanitizer = sanitizer;
     }
     AppPlaylistComponent.prototype.ngOnInit = function () {
         this.playlist_id = this.activedRoute.snapshot.params['playlist_id'];
@@ -1216,7 +1219,8 @@ var AppPlaylistComponent = (function () {
         var _this = this;
         this.playlistService.getItem(this.playlist_id).subscribe(function (data) {
             _this.playlist = data;
-            _this.playlistsharelink = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].siteURL + 'page/playlist/' + _this.playlist.playlist_id;
+            _this.playlistsharelink = __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].siteURL + 'page/playlist/' + _this.playlist.playlist_id;
+            _this.spotify_embed = _this.sanitizer.bypassSecurityTrustHtml(data['playlist_spotify_embed']);
         });
     };
     AppPlaylistComponent = __decorate([
@@ -1226,7 +1230,8 @@ var AppPlaylistComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/views/playlist/app-playlist.component.scss")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_2__shared_services_admin_playlist_service__["a" /* PlaylistService */]])
+            __WEBPACK_IMPORTED_MODULE_3__shared_services_admin_playlist_service__["a" /* PlaylistService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["DomSanitizer"]])
     ], AppPlaylistComponent);
     return AppPlaylistComponent;
 }());
