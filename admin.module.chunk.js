@@ -266,6 +266,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__dashbaord_filter_filter_component__ = __webpack_require__("../../../../../src/app/views/admin/dashbaord/filter/filter.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__dashbaord_filter_filterpopup_filterpopup_component__ = __webpack_require__("../../../../../src/app/views/admin/dashbaord/filter/filterpopup/filterpopup.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__admin_routing__ = __webpack_require__("../../../../../src/app/views/admin/admin.routing.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__contactus_contactus_component__ = __webpack_require__("../../../../../src/app/views/admin/contactus/contactus.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -296,6 +297,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 // import { PlaylistTablePopupComponent } from './playlist/playlistpopup/playlist-table-popup.component';
+
 
 
 
@@ -370,7 +372,8 @@ var AdminModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_30__dashbaord_musicreviews_musicreviews_component__["a" /* AppMusicReviewsComponent */],
                 __WEBPACK_IMPORTED_MODULE_31__dashbaord_social_social_component__["a" /* AppSocialComponent */],
                 __WEBPACK_IMPORTED_MODULE_32__dashbaord_filter_filter_component__["a" /* AppFilterComponent */],
-                __WEBPACK_IMPORTED_MODULE_33__dashbaord_filter_filterpopup_filterpopup_component__["a" /* FilterPopupComponent */]
+                __WEBPACK_IMPORTED_MODULE_33__dashbaord_filter_filterpopup_filterpopup_component__["a" /* FilterPopupComponent */],
+                __WEBPACK_IMPORTED_MODULE_35__contactus_contactus_component__["a" /* ContactusComponent */]
             ],
             providers: [],
             entryComponents: [
@@ -405,6 +408,8 @@ var AdminModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__songs_song_app_adminsong_component__ = __webpack_require__("../../../../../src/app/views/admin/songs/song/app-adminsong.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__about_app_adminabout_component__ = __webpack_require__("../../../../../src/app/views/admin/about/app-adminabout.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__placement_app_adminplacement_component__ = __webpack_require__("../../../../../src/app/views/admin/placement/app-adminplacement.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__contactus_contactus_component__ = __webpack_require__("../../../../../src/app/views/admin/contactus/contactus.component.ts");
+
 
 
 
@@ -459,6 +464,11 @@ var AdminRoutes = [
         path: 'placements',
         component: __WEBPACK_IMPORTED_MODULE_8__placement_app_adminplacement_component__["a" /* AppAdminPlacementComponent */],
         data: { title: 'Admin', breadcrumb: 'Placements' }
+    },
+    {
+        path: 'contact',
+        component: __WEBPACK_IMPORTED_MODULE_9__contactus_contactus_component__["a" /* ContactusComponent */],
+        data: { title: 'Admin', breadcrumb: 'Contact' }
     }
 ];
 
@@ -803,6 +813,97 @@ var ArtistTablePopupComponent = (function () {
             __WEBPACK_IMPORTED_MODULE_3__shared_services_admin_artists_service__["a" /* ArtistService */]])
     ], ArtistTablePopupComponent);
     return ArtistTablePopupComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/views/admin/contactus/contactus.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"m-333\">\n  \n  <form [formGroup]=\"itemForm\" (ngSubmit)=\"submit()\" *ngIf=\"itemForm\">\n    <div fxLayout=\"row\" fxLayout.lt-sm=\"column\" fxLayoutWrap=\"wrap\">\n      <div fxFlex=\"100\"  class=\"pt-1 pr-1\">\n        <quill-editor \n          theme=\"snow\" \n          height=\"500px\"\n          [formControl]=\"itemForm.controls['contact_content']\"\n          (onContentChanged)=\"onContentChanged()\" \n          onSelectionChanged=\"onSelectionChanged()\"></quill-editor>\n      </div>\n\n      <div fxFlex=\"100\"  class=\"pt-1 pr-1\" style=\"margin-top: 80px;\">\n        <button mat-raised-button color=\"primary\" [disabled]=\"itemForm.invalid\">Save</button>\n      </div>\n    </div>\n  </form>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/views/admin/contactus/contactus.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/views/admin/contactus/contactus.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactusComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_admin_contact_service__ = __webpack_require__("../../../../../src/app/shared/services/admin/contact.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ContactusComponent = (function () {
+    function ContactusComponent(fb, contactService) {
+        this.fb = fb;
+        this.contactService = contactService;
+    }
+    ContactusComponent.prototype.ngOnInit = function () {
+        this.loadContact();
+    };
+    ContactusComponent.prototype.ngOnDestroy = function () {
+    };
+    ContactusComponent.prototype.loadContact = function () {
+        var _this = this;
+        this.contactService.get().subscribe(function (data) {
+            _this.contact = data;
+            _this.buildForm();
+        });
+    };
+    ContactusComponent.prototype.buildForm = function () {
+        this.itemForm = this.fb.group({
+            contact_content: [this.contact.contact_content || '', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["Validators"].required]
+        });
+    };
+    ContactusComponent.prototype.submit = function () {
+        var _this = this;
+        this.contactService.save(this.itemForm.value).subscribe(function (data) {
+            _this.loadContact();
+        });
+    };
+    ContactusComponent.prototype.onContentChanged = function () { };
+    ContactusComponent.prototype.onSelectionChanged = function () { };
+    ContactusComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-contactus',
+            template: __webpack_require__("../../../../../src/app/views/admin/contactus/contactus.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/views/admin/contactus/contactus.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormBuilder"],
+            __WEBPACK_IMPORTED_MODULE_2__shared_services_admin_contact_service__["a" /* ContactService */]])
+    ], ContactusComponent);
+    return ContactusComponent;
 }());
 
 
@@ -1391,7 +1492,7 @@ var AppMusicReviewsComponent = (function () {
 /***/ "../../../../../src/app/views/admin/dashbaord/social/social.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"social\" *ngIf=\"itemForm\">\r\n  \r\n  <form [formGroup]=\"itemForm\" (ngSubmit)=\"save()\">\r\n    <div fxLayout=\"row\" fxLayout.lt-sm=\"column\" fxLayoutWrap=\"wrap\">\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_applemusic\"\r\n          [formControl]=\"itemForm.controls['social_applemusic']\"\r\n          placeholder=\"Apple Music\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_facebook\"\r\n          [formControl]=\"itemForm.controls['social_facebook']\"\r\n          placeholder=\"Facebook\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_instagram\"\r\n          [formControl]=\"itemForm.controls['social_instagram']\"\r\n          placeholder=\"Instagram\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_soundcloud\"\r\n          [formControl]=\"itemForm.controls['social_soundcloud']\"\r\n          placeholder=\"SoundCloud\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_spotify\"\r\n          [formControl]=\"itemForm.controls['social_spotify']\"\r\n          placeholder=\"Spotify\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_twitter\"\r\n          [formControl]=\"itemForm.controls['social_twitter']\"\r\n          placeholder=\"Twitter\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_youtube\"\r\n          [formControl]=\"itemForm.controls['social_youtube']\"\r\n          placeholder=\"Youtube\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\" class=\"mt-1\">\r\n        <button mat-raised-button color=\"primary\" [disabled]=\"itemForm.invalid\">Save</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>"
+module.exports = "<div class=\"social\" *ngIf=\"itemForm\">\r\n  \r\n  <form [formGroup]=\"itemForm\" (ngSubmit)=\"save()\">\r\n    <div fxLayout=\"row\" fxLayout.lt-sm=\"column\" fxLayoutWrap=\"wrap\">\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_applemusic\"\r\n          [formControl]=\"itemForm.controls['social_applemusic']\"\r\n          placeholder=\"Apple Music\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_facebook\"\r\n          [formControl]=\"itemForm.controls['social_facebook']\"\r\n          placeholder=\"Facebook\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_instagram\"\r\n          [formControl]=\"itemForm.controls['social_instagram']\"\r\n          placeholder=\"Instagram\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_soundcloud\"\r\n          [formControl]=\"itemForm.controls['social_soundcloud']\"\r\n          placeholder=\"SoundCloud\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_spotify\"\r\n          [formControl]=\"itemForm.controls['social_spotify']\"\r\n          placeholder=\"Spotify\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_twitter\"\r\n          [formControl]=\"itemForm.controls['social_twitter']\"\r\n          placeholder=\"Twitter\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"social_youtube\"\r\n          [formControl]=\"itemForm.controls['social_youtube']\"\r\n          placeholder=\"Youtube\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\"  class=\"pr-1\">\r\n        <mat-form-field class=\"full-width\">\r\n          <input\r\n          matInput\r\n          name=\"footer_text\"\r\n          [formControl]=\"itemForm.controls['footer_text']\"\r\n          placeholder=\"Footer Text\">\r\n        </mat-form-field>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\" class=\"mt-1\">\r\n        <button mat-raised-button color=\"primary\" [disabled]=\"itemForm.invalid\">Save</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>"
 
 /***/ }),
 
@@ -1465,7 +1566,8 @@ var AppSocialComponent = (function () {
             social_soundcloud: [item.social_soundcloud || '', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_3_ng2_validation__["CustomValidators"].url]],
             social_spotify: [item.social_spotify || '', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_3_ng2_validation__["CustomValidators"].url]],
             social_twitter: [item.social_twitter || '', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_3_ng2_validation__["CustomValidators"].url]],
-            social_youtube: [item.social_youtube || '', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_3_ng2_validation__["CustomValidators"].url]]
+            social_youtube: [item.social_youtube || '', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required, __WEBPACK_IMPORTED_MODULE_3_ng2_validation__["CustomValidators"].url]],
+            footer_text: [item.footer_text || '', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]]
         });
     };
     AppSocialComponent.prototype.save = function () {

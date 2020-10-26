@@ -240,7 +240,7 @@ var AppCatalogComponent = (function () {
 /***/ "../../../../../src/app/views/contact/app-contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"contact\">\r\n    <h3>SUBMITTION REQUIREMENT</h3>\r\n    <h4>Before submitting your music, please review the following guidelines:</h4>\r\n\r\n    <ul>\r\n        <li>we only accept streaming links</li>\r\n        <li>Please provide all songwriters and publishers information </li>\r\n    </ul>\r\n\r\n    <p>For Music submissions, send us your streaming (soundcloud, Spotify or MP3) & contact number (please indicate the best time to reach you) | <a href=\"mailto:Demo@synchaudio.com\" class=\"mailto\">Demo@synchaudio.com</a></p>\r\n\r\n    <hr>\r\n\r\n    <div class=\"contact-form\">\r\n        <h4>Alternatively, please use the following form to contact us.</h4>\r\n        <div class=\"contact-form-container\">\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Name\">\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Email\">\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Reason\">\r\n                    <mat-option value=\"general\">General Questions</mat-option>\r\n                    <mat-option value=\"licensing\">Licensing</mat-option>\r\n                    <mat-option value=\"sampling\">Sampling our songs</mat-option>\r\n                    <mat-option value=\"writers\">Writers & Producers</mat-option>\r\n                    <mat-option value=\"artist_management\">Artist Management</mat-option>\r\n                    <mat-option value=\"sample_clearance\">Sample Clearance</mat-option>\r\n                    <mat-option value=\"advertising\">Advertising</mat-option>\r\n                    <mat-option value=\"artist_request\">Artist Requests</mat-option>\r\n                    <mat-option value=\"synchstage\">SynchStage</mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            \r\n            <mat-form-field>\r\n                <textarea matInput placeholder=\"Message\"></textarea>\r\n            </mat-form-field>\r\n            <button mat-raised-button color=\"primary\">Send</button>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"contact\">\r\n    <!-- <h3>SUBMITTION REQUIREMENT</h3>\r\n    <h4>Before submitting your music, please review the following guidelines:</h4>\r\n\r\n    <ul>\r\n        <li>we only accept streaming links</li>\r\n        <li>Please provide all songwriters and publishers information </li>\r\n    </ul>\r\n\r\n    <p>For Music submissions, send us your streaming (soundcloud, Spotify or MP3) & contact number (please indicate the best time to reach you) | <a href=\"mailto:Demo@synchaudio.com\" class=\"mailto\">Demo@synchaudio.com</a></p> -->\r\n\r\n    <div class=\"contact\" [innerHTML]=\"contact.contact_content\" *ngIf=\"contact\">\r\n    </div>\r\n\r\n    <hr>\r\n\r\n    <div class=\"contact-form\">\r\n        <h4>Alternatively, please use the following form to contact us.</h4>\r\n        <div class=\"contact-form-container\">\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Name\">\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n                <input matInput placeholder=\"Email\">\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n                <mat-select placeholder=\"Reason\">\r\n                    <mat-option value=\"general\">General Questions</mat-option>\r\n                    <mat-option value=\"licensing\">Licensing</mat-option>\r\n                    <mat-option value=\"sampling\">Sampling our songs</mat-option>\r\n                    <mat-option value=\"writers\">Writers & Producers</mat-option>\r\n                    <mat-option value=\"artist_management\">Artist Management</mat-option>\r\n                    <mat-option value=\"sample_clearance\">Sample Clearance</mat-option>\r\n                    <mat-option value=\"advertising\">Advertising</mat-option>\r\n                    <mat-option value=\"artist_request\">Artist Requests</mat-option>\r\n                    <mat-option value=\"synchstage\">SynchStage</mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n            \r\n            <mat-form-field>\r\n                <textarea matInput placeholder=\"Message\"></textarea>\r\n            </mat-form-field>\r\n            <button mat-raised-button color=\"primary\">Send</button>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -268,6 +268,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppContactComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services_admin_contact_service__ = __webpack_require__("../../../../../src/app/shared/services/admin/contact.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -278,17 +279,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var AppContactComponent = (function () {
-    function AppContactComponent() {
+    function AppContactComponent(contactService) {
+        this.contactService = contactService;
     }
-    AppContactComponent.prototype.ngOnInit = function () { };
+    AppContactComponent.prototype.ngOnInit = function () {
+        this.loadAbout();
+    };
+    AppContactComponent.prototype.loadAbout = function () {
+        var _this = this;
+        this.contactService.get().subscribe(function (data) {
+            _this.contact = data;
+        });
+    };
     AppContactComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-contact',
             template: __webpack_require__("../../../../../src/app/views/contact/app-contact.component.html"),
             styles: [__webpack_require__("../../../../../src/app/views/contact/app-contact.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_services_admin_contact_service__["a" /* ContactService */]])
     ], AppContactComponent);
     return AppContactComponent;
 }());
@@ -300,7 +311,7 @@ var AppContactComponent = (function () {
 /***/ "../../../../../src/app/views/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"home-page m-333\">\r\n  <slideshow \r\n    [imageUrls]=\"sliders\" \r\n    height=\"600px\"\r\n    [autoPlay]=\"true\"></slideshow>\r\n  \r\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" *ngIf=\"featuredData\">\r\n      <div fxFlex=\"100\" fxFlex.gt-xs=\"40\">\r\n          <mat-card class=\"p-0\" >\r\n            <mat-card-content class=\"featured-songs\">\r\n              <h3>Featured Playlist</h3>\r\n              <app-songitem *ngFor=\"let song of featuredData.recently_added_songs\" [songItem]='song'></app-songitem>\r\n            </mat-card-content>\r\n          </mat-card>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\" fxFlex.gt-xs=\"60\">\r\n        <mat-card class=\"p-0\" >\r\n          <mat-card-content class=\"featured-artists\">\r\n            <div fxLayout=\"row\" fxLayoutWrap=\"wrap\">\r\n\r\n              <!-- <div fxFlex=\"100\" fxFlex.gt-xs=\"33\" *ngFor=\"let playlist of featuredData.featured_playlists\">\r\n                <h4 class=\"featured-title\">Featured Playlist</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotoPlaylistPage(playlist.playlist_id)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (playlist?.playlist_thumb || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">{{playlist.playlist_title}}</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div> -->\r\n\r\n              <!-- <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let song of featuredData.featured_songs\">\r\n                  <h4 class=\"featured-title\">Featured Song</h4>\r\n                  <mat-card class=\"p-0\"  (click)=\"gotoSongPage(song)\">\r\n                    <div [ngStyle]=\"{background: 'url(' + (song?.song_thumb || '/assets/images/music_icon.png') + ')'}\" class=\"artist-thumb\">\r\n                      <span class=\"featured-item-title\">{{song.song_title}}</span>\r\n                    </div>\r\n                  </mat-card>\r\n                </div> -->\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let artist of featuredData.featured_artists\">\r\n                <h4 class=\"featured-title\">Featured Artist</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotoartistpage(artist.artist_id)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (artist?.artist_avatar || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">{{artist.artist_name}}</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let video of featuredData.featured_videos\">\r\n                <h4 class=\"featured-title\">Featured Video</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotovideo(video.video_link)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (video?.video_thumb || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">Featured Video</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let placementItem of featuredData.featured_placement\">\r\n                <h4 class=\"featured-title\">Featured Placement</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotoPlacement(placementItem.placement_id)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (placementItem?.placement_poster || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">{{placementItem.placement_title}}</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\">\r\n                <h4 class=\"featured-title\">Music Reviews</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotomusicReview()\">\r\n                  <div [ngStyle]=\"{background: 'url('+featuredData.music_review.musicreview_thumb+')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">Music Reviews</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n            </div>\r\n          </mat-card-content>\r\n        </mat-card>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "\r\n<div class=\"home-page m-333\">\r\n  <slideshow \r\n    [imageUrls]=\"sliders\" \r\n    height=\"600px\"\r\n    [autoPlay]=\"true\"></slideshow>\r\n  \r\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" *ngIf=\"featuredData\">\r\n      <div fxFlex=\"100\" fxFlex.gt-xs=\"40\">\r\n          <mat-card class=\"p-0\" >\r\n            <mat-card-content class=\"featured-songs\">\r\n              <h3>Featured Playlist</h3>\r\n              <!-- <app-songitem *ngFor=\"let song of featuredData.recently_added_songs\" [songItem]='song'></app-songitem> -->\r\n              <div [innerHTML]=\"spotify_embed\"></div>\r\n            </mat-card-content>\r\n          </mat-card>\r\n      </div>\r\n\r\n      <div fxFlex=\"100\" fxFlex.gt-xs=\"60\">\r\n        <mat-card class=\"p-0\" >\r\n          <mat-card-content class=\"featured-artists\">\r\n            <div fxLayout=\"row\" fxLayoutWrap=\"wrap\">\r\n\r\n              <!-- <div fxFlex=\"100\" fxFlex.gt-xs=\"33\" *ngFor=\"let playlist of featuredData.featured_playlists\">\r\n                <h4 class=\"featured-title\">Featured Playlist</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotoPlaylistPage(playlist.playlist_id)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (playlist?.playlist_thumb || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">{{playlist.playlist_title}}</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div> -->\r\n\r\n              <!-- <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let song of featuredData.featured_songs\">\r\n                  <h4 class=\"featured-title\">Featured Song</h4>\r\n                  <mat-card class=\"p-0\"  (click)=\"gotoSongPage(song)\">\r\n                    <div [ngStyle]=\"{background: 'url(' + (song?.song_thumb || '/assets/images/music_icon.png') + ')'}\" class=\"artist-thumb\">\r\n                      <span class=\"featured-item-title\">{{song.song_title}}</span>\r\n                    </div>\r\n                  </mat-card>\r\n                </div> -->\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let artist of featuredData.featured_artists\">\r\n                <h4 class=\"featured-title\">Featured Artist</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotoartistpage(artist.artist_id)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (artist?.artist_avatar || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">{{artist.artist_name}}</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let video of featuredData.featured_videos\">\r\n                <h4 class=\"featured-title\">Featured Video</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotovideo(video.video_link)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (video?.video_thumb || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">Featured Video</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\" *ngFor=\"let placementItem of featuredData.featured_placement\">\r\n                <h4 class=\"featured-title\">Featured Placement</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotoPlacement(placementItem.placement_id)\">\r\n                  <div [ngStyle]=\"{background: 'url(' + (placementItem?.placement_poster || '/assets/images/avatar.png') + ')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">{{placementItem.placement_title}}</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n              <div fxFlex=\"100\" fxFlex.gt-xs=\"50\">\r\n                <h4 class=\"featured-title\">Music Reviews</h4>\r\n                <mat-card class=\"p-0\"  (click)=\"gotomusicReview()\">\r\n                  <div [ngStyle]=\"{background: 'url('+featuredData.music_review.musicreview_thumb+')'}\" class=\"artist-thumb\">\r\n                    <span class=\"featured-item-title\">Music Reviews</span>\r\n                  </div>\r\n                </mat-card>\r\n              </div>\r\n\r\n            </div>\r\n          </mat-card-content>\r\n        </mat-card>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -329,9 +340,10 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppHomeComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services_featured_service__ = __webpack_require__("../../../../../src/app/shared/services/featured.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_admin_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/admin/dashboard.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_player_service__ = __webpack_require__("../../../../../src/app/shared/services/player.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services_featured_service__ = __webpack_require__("../../../../../src/app/shared/services/featured.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services_admin_dashboard_service__ = __webpack_require__("../../../../../src/app/shared/services/admin/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services_player_service__ = __webpack_require__("../../../../../src/app/shared/services/player.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -346,12 +358,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppHomeComponent = (function () {
-    function AppHomeComponent(featuredService, router, dashboardService, playerService) {
+    function AppHomeComponent(featuredService, router, dashboardService, playerService, sanitizer) {
         this.featuredService = featuredService;
         this.router = router;
         this.dashboardService = dashboardService;
         this.playerService = playerService;
+        this.sanitizer = sanitizer;
     }
     AppHomeComponent.prototype.ngOnInit = function () {
         this.loadFeaturedData();
@@ -365,6 +379,7 @@ var AppHomeComponent = (function () {
                 var video_id = video.video_link.replace('https://www.youtube.com/watch?v=', '');
                 video.video_thumb = 'https://img.youtube.com/vi/' + video_id + '/0.jpg';
             });
+            _this.spotify_embed = _this.sanitizer.bypassSecurityTrustHtml(_this.featuredData.featured_playlists[0]['playlist_spotify_embed']);
         });
     };
     AppHomeComponent.prototype.loadSliders = function () {
@@ -405,10 +420,11 @@ var AppHomeComponent = (function () {
             template: __webpack_require__("../../../../../src/app/views/home/home.component.html"),
             styles: [__webpack_require__("../../../../../src/app/views/home/home.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_services_featured_service__["a" /* FeaturedService */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__shared_services_featured_service__["a" /* FeaturedService */],
             __WEBPACK_IMPORTED_MODULE_1__angular_router__["g" /* Router */],
-            __WEBPACK_IMPORTED_MODULE_3__shared_services_admin_dashboard_service__["a" /* DashboardService */],
-            __WEBPACK_IMPORTED_MODULE_4__shared_services_player_service__["a" /* PlayerService */]])
+            __WEBPACK_IMPORTED_MODULE_4__shared_services_admin_dashboard_service__["a" /* DashboardService */],
+            __WEBPACK_IMPORTED_MODULE_5__shared_services_player_service__["a" /* PlayerService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["DomSanitizer"]])
     ], AppHomeComponent);
     return AppHomeComponent;
 }());
