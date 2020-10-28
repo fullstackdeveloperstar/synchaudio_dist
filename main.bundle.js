@@ -4685,12 +4685,6 @@ var NavigationService = (function () {
                 tooltip: 'About',
                 state: 'page/about'
             },
-            {
-                name: 'Contact',
-                type: 'link',
-                tooltip: 'About',
-                state: 'page/contact'
-            }
         ];
         this.adminMenu = [
             {
@@ -4747,12 +4741,6 @@ var NavigationService = (function () {
                 type: 'link',
                 tooltip: 'About',
                 state: 'admin/about'
-            },
-            {
-                name: 'Contact',
-                type: 'link',
-                tooltip: 'contact',
-                state: 'admin/contact'
             },
         ];
         // Icon menu TITLE at the very top of navigation.
